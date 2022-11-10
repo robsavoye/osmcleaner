@@ -26,7 +26,8 @@ from progress.spinner import PixelSpinner
 from codetiming import Timer
 import concurrent.futures
 from cpuinfo import get_cpu_info
-
+from tagchecks import TagChecks
+from buildingchecks import BuildingChecks
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Process OSM data for quality issues')
@@ -39,6 +40,7 @@ if __name__ == '__main__':
     # if verbose, dump to the terminal.
     if args.verbose is not None:
         root = logging.getLogger()
+        # This gets mesages from the imported modules too. More verbose, but useful
         root.setLevel(logging.DEBUG)
 
         ch = logging.StreamHandler(sys.stdout)
@@ -47,7 +49,8 @@ if __name__ == '__main__':
         ch.setFormatter(formatter)
         root.addHandler(ch)
 
-    # Needs command line arguments
+    # Needs command line arguments to actually do anything
     if len(argv) == 1:
         # parser.print_help()
         parser.print_usage()
+
